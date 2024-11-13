@@ -1,0 +1,92 @@
+.libre-baskerville-regular {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+ .title-meme{
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.title-meme{color: #ffffff;
+text-align: center;}
+.description{color: #ffffff;
+text-align: center;}
+.bottom-line{color: #ffffff;
+    text-align: center;
+}
+.image-meme{
+    border: 5px solid #fff; /* 5px solid black border */
+    border-radius: 10px; /* Optional: Adds rounded corners */
+    display: block;
+    margin: auto;
+    width: 50%; /* Optional: Set a width to control image size */
+    }
+
+    
+.content-container {
+    width: 80%; /* Make sure to set a width */
+    margin: 0 auto; /* Centers element horizontally */
+}
+
+
+ body {
+        background-color: #000000;  /* Black background */
+    }
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    background-color: #333;  /* Dark background color for the navbar */
+    padding: 1em 0;          /* Adds vertical padding for a thicker navbar */
+}
+
+.navbar ul {
+    list-style: none;        /* Removes default bullet points */
+    display: flex;           /* Displays list items in a row */
+    justify-content: center; /* Centers the navigation links */
+    gap: 20px;               /* Adds spacing between links */
+}
+
+.navbar ul li a {
+    color: white;            /* White text color */
+    text-decoration: none;   /* Removes underline from links */
+    font-size: 1.2em;        /* Increases font size for readability */
+    padding: 0.5em 1em;      /* Adds padding inside each link */
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
+    border-radius: 5px;      /* Slightly rounds the corners */
+}
+
+.navbar ul li a:hover {
+    background-color: #555;  /* Darker background color on hover */
+    color: #fff;             /* Maintains white text on hover */
+}
+.intro-text, .what-to-expect, .explore {
+    max-width: 600px;
+    margin: 1em auto;
+    text-align: center;
+    line-height: 1.6;
+    color: #555;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 1.5em;
+    color: #ffffff;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 1.5em;
+    color: #ffffff;
+    font-size: 1.8em;
+}
+
+strong {
+    color: #ffffff;
+}
