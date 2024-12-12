@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>this is my second page of my app! I hope you are enjoying my wonderful app</p>
+
+{#My ratings:#}
+
+{% for band in bands %}
+<div>{{ band.song }}, {{ band.album }}, {{ band.artist }}, {{ band.rating }}
+</div>
+{% endfor %}
+{% endblock %}
