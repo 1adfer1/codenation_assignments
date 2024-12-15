@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 class="title">To Do List</h1>
+    </header>
+
+    <!-- Add Task Toggle Button -->
+    <div class="add-task-container">
+        <button type="button" class="btn add-task-toggle-btn js-show-add-form">Add New Task</button>
+    </div>
+
+    <!-- Add Task Form (hidden by default) -->
+    <div class="form-container" style="display: none;">
+        <form action="/add" method="post" class="inline-form">
+            <input type="text" name="task" class="task-input" placeholder="Enter a Task" required>
+            <button type="submit" class="add-btn">Add Task</button>
+            <button type="button" class="btn cancel-btn js-cancel-add">Cancel</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Display Todo List -->
+    {% if todo_list %}
+    <div class="todo-list">
+        {% for todo in todo_list %}
+        <div class="todo-item" data-item-id="{{ todo.id }}">
+            <!-- Normal Task View -->
+            <div class="task-view">
+                <div class="task-info">
+                    <p class="task-text">{{ todo.task }}</p>
+                    <p class="task-status">{{ 'Complete' if todo.complete else 'Incomplete' }}</p>
+                    <p class="task-date">Created on: {{ todo.date_created }}</p>
+                </div>
+                <div class="task-actions">
+                    <!-- Complete/Incomplete -->
+                    <form action="/update/{{ todo.id }}" method="post" class="inline-form">
+                        {% if todo.complete %}
+                        <button type="submit" class="btn incomplete-btn">Incomplete</button>
+                        {% else %}
+                        <button type="submit" class="btn complete-btn">Complete</button>
+                        {% endif %}
+                    </form>
+
+                    <!-- Edit Button -->
+                    <button type="button" class="btn edit-btn js-edit-btn">Edit</button>
+
+                    <!-- Delete -->
+                    <form action="/delete/{{ todo.id }}" method="post" class="inline-form">
+                        <button type="submit" class="btn delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Edit Form (hidden by default) -->
+            <div class="task-edit-form" style="display: none;">
+                <form action="/edit/{{ todo.id }}" method="post" class="inline-form">
+                    <input type="text" name="new_task" class="edit-input" placeholder="Edit Task" required>
+                    <button type="submit" class="btn edit-btn">Update</button>
+                    <button type="button" class="btn cancel-btn js-cancel-btn">Cancel</button>
+                </form>
+            </div>
+
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-tasks">No tasks found. Add one above!</p>
+    {% endif %}
+</div>
+
+<!-- the jsvascript code is done using ChatGPT  -->
+<script>
+// Show Add Task Form
+document.querySelector('.js-show-add-form').addEventListener('click', function() {
+    document.querySelector('.add-task-toggle-btn').style.display = 'none';
+    document.querySelector('.form-container').style.display = 'flex';
+});
+
+// Cancel Add Task
+document.querySelector('.js-cancel-add').addEventListener('click', function() {
+    document.querySelector('.form-container').style.display = 'none';
+    document.querySelector('.add-task-toggle-btn').style.display = 'inline-block';
+});
+
+// Toggle Edit Mode for tasks
+document.querySelectorAll('.js-edit-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const todoItem = this.closest('.todo-item');
+        const taskView = todoItem.querySelector('.task-view');
+        const editForm = todoItem.querySelector('.task-edit-form');
+
+        // Hide the normal view and show edit form
+        taskView.style.display = 'none';
+        editForm.style.display = 'flex';
+    });
+});
+
+// Cancel Editing Task
+document.querySelectorAll('.js-cancel-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const todoItem = this.closest('.todo-item');
+        const taskView = todoItem.querySelector('.task-view');
+        const editForm = todoItem.querySelector('.task-edit-form');
+
+        // Hide edit form and show normal view
+        editForm.style.display = 'none';
+        taskView.style.display = 'flex';
+    });
+});
+</script>
+
+</body>
+</html>
